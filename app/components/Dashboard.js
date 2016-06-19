@@ -7,6 +7,8 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+var Badge = require('./Badge')
+
 class Dashboard extends Component {
   makeBackground(btn) {
     var obj = {
@@ -36,7 +38,9 @@ class Dashboard extends Component {
   render() {
     return (
         <View style={styles.container}>
-          <Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image} resizeMode="contain"/>
+          <View>
+            <Badge userInfo={this.props.userInfo}></Badge>
+          </View>
           <TouchableHighlight
             style={this.makeBackground(0)}
             onPress={this.goToProfile.bind(this)}
@@ -66,11 +70,15 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    marginTop: 64
   },
   image: {
     width: 475,
     height: 400,
     marginBottom: 30
+  },
+  badge: {
+    flex: 1
   }
 });
 module.exports = Dashboard;

@@ -11,8 +11,8 @@ class Badge extends Component {
     return (
         <View style={styles.container}>
           <Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image} resizeMode="contain"/>
-          <Text>{this.props.userInfo.name}</Text>
-          <Text>{this.props.userInfo.login}</Text>
+          <Text style={styles.name}>{this.props.userInfo.name}</Text>
+          <Text style={styles.handle}>{this.props.userInfo.login}</Text>
         </View>
     );
   }
@@ -26,9 +26,20 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 475,
-    height: 400,
-    marginBottom: 30
+    flex: 1,
+    width: 90,
+    height: 90,
+    marginBottom: 18,
+    borderRadius: 45,
+    marginTop: 30
+  },
+  name: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 3
+  },
+  handle: {
+    color: "#999"
   }
 });
 Badge.propType = {
