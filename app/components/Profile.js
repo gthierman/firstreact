@@ -3,7 +3,6 @@ import {
   Text,
   View,
   StyleSheet,
-  Image,
   Dimensions
 } from 'react-native';
 
@@ -22,6 +21,14 @@ class Profile extends Component {
     var list = listArr.map((item, index) => {
       if(!userInfo[item]) {
         return <View key={index} />
+      }else if(userInfo[item] === 'public_repos'){
+        return (
+          <View key={index}>
+            <View>
+              <Text>word</Text>
+            </View>
+          </View>
+        )
       }else{
         return (
           <View key={index}>

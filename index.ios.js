@@ -22,12 +22,12 @@ class FirstReact extends Component {
         <NavigatorIOS 
           style={styles.wrapper}
           initialRoute={{
-            title: "ya buddy",
+            title: "Search",
             component: Main,
           }}
           renderScene={(route, navigator) => 
             <View>
-              <StatusBar barStyle={route.barStyle}/>
+              <StatusBar barStyle={route.barStyle} backButtonTitle={route.backButtonTitle}/>
             </View>
           }
           tintColor="#fff"

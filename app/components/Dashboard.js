@@ -3,15 +3,29 @@ import {
   Text,
   View,
   StyleSheet,
-  Image,
   TouchableHighlight,
   ScrollView
 } from 'react-native';
-
+var api = require('../utils/api')
 var Badge = require('./Badge')
 var Profile = require('./Profile')
+var Repos = require('./Repos')
 
 class Dashboard extends Component {
+  viewRepos() {
+    api.getRepos(this.props.userInfo.login)
+      .then((res) => {
+        console.log(res)
+        this.props.navigator.push({
+          component: Repos,
+          title: this.props.userInfo.name + "'s Repos",
+          passProps: {repos: res},
+          backButtonTitle: "Back"
+        })
+      })
+      .catch((res) => {
+      })
+  }
   render() {
     return (
         <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.container}>
@@ -21,6 +35,11 @@ class Dashboard extends Component {
           <View style={styles.profile}>
             <Profile userInfo={this.props.userInfo}></Profile>
           </View>
+          <TouchableHighlight 
+            onPress={this.viewRepos.bind(this)}
+            underlayColor="white">
+            <Text>Get Repos</Text>
+          </TouchableHighlight>
         </ScrollView>
     );
   }

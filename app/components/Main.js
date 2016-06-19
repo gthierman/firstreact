@@ -36,14 +36,11 @@ class Main extends Component {
             isLoading: false
           })
         }else {
-          console.log(res)
           this.props.navigator.push({
             title: res.name || "select an option",
             component: Dashboard,
             passProps: {userInfo: res },
-            route: {
-              barStyle: "Default"
-            }
+            backButtonTitle: "Back"
           })
           this.setState({
             isLoading: false,
@@ -51,7 +48,8 @@ class Main extends Component {
             username: ''
           })
         }
-      })
+      }
+    )
   }
   render() {
     var showErr = (
