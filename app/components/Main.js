@@ -38,7 +38,7 @@ class Main extends Component {
         }else{
           console.log(this)
           this.props.navigator.push({
-            title: res.name || "select an option",
+            title: res.name || "Profile",
             component: Dashboard,
             passProps: {userInfo: res},
             backButtonTitle: "Back"
@@ -61,7 +61,7 @@ class Main extends Component {
     )
     return (
         <View style={styles.container}>
-          <Text style={styles.title}>Search for a Github user {this.state.isLoading} {this.state.username}</Text>
+          <Text style={styles.title}>Search for a Github user</Text>
           <TextInput
             style={styles.searchInput}
             value={this.state.username}
@@ -70,7 +70,7 @@ class Main extends Component {
             style={[styles.button, !this.state.isLoading && styles.visible, this.state.isLoading && styles.hidden]}
             onPress={this.handleSubmit.bind(this)}
             underlayColor="white">
-            <Text>Submit</Text>
+            <Text style={styles.buttonText}>Submit</Text>
           </TouchableHighlight>
           <ActivityIndicatorIOS
             animating={this.state.isLoading}
@@ -109,14 +109,15 @@ var styles = StyleSheet.create({
     color: "red"
   },
   button: {
-    backgroundColor: "white",
+    backgroundColor: "#0075bb",
     borderRadius: 2,
-    borderWidth: 1,
-    borderColor: "black",
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 12,
     paddingBottom: 12
+  },
+  buttonText: {
+    color: "#fff"
   },
   hidden: {
     opacity: 0

@@ -33,6 +33,12 @@ var styles = StyleSheet.create({
   },
   profile: {
     marginTop: 30
+  },
+  hidden: {
+    opacity: 0
+  },
+  visible: {
+    opacity: 1
   }
 });
 module.exports = Dashboard;
