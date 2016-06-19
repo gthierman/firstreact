@@ -76,7 +76,7 @@ class Main extends Component {
           <ActivityIndicatorIOS
             animating={this.state.isLoading}
             color="#111" 
-            size="large"
+            size="small"
             style={indicatorVisibility} />
           {showErr}
         </View>

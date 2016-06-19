@@ -12,36 +12,13 @@ var Badge = require('./Badge')
 var Profile = require('./Profile')
 
 class Dashboard extends Component {
-  makeBackground(btn) {
-    var obj = {
-      flexDirection: 'row',
-      alignSelf: 'stretch',
-      justifyContent: 'center',
-      flex: 1
-    }
-    if(btn === 0) {
-      obj.backgroundColor = "#333"
-    }else if(btn === 1) {
-      obj.backgroundColor = "#e77aae"
-    }else if(btn === 2){
-      obj.backgroundColor = "#758bf4"
-    }
-    return obj;
-  }
-  goToProfile(event) {
-    
-  }
-  goToRepos(event) {
-    console.log('go to repos')
-  }
-  goToNotes(event) {
-    console.log('go to notes')
-  }
   render() {
     return (
         <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.container}>
           <View>
             <Badge userInfo={this.props.userInfo}></Badge>
+          </View>
+          <View style={styles.profile}>
             <Profile userInfo={this.props.userInfo}></Profile>
           </View>
         </ScrollView>
@@ -57,6 +34,10 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    alignSelf: "stretch"
+  },
+  profile: {
+    marginTop: 30
   }
 });
 module.exports = Dashboard;

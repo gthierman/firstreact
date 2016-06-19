@@ -12,7 +12,7 @@ class Badge extends Component {
         <View style={styles.container}>
           <Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image} resizeMode="contain"/>
           <Text style={styles.name}>{this.props.userInfo.name}</Text>
-          <Text style={styles.handle}>{this.props.userInfo.login}</Text>
+          <Text style={styles.handle}>@{this.props.userInfo.login}</Text>
         </View>
     );
   }

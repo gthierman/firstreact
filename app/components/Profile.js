@@ -3,8 +3,13 @@ import {
   Text,
   View,
   StyleSheet,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
+
+var width = Dimensions.get('window').width;
+var SectionTitle = require('./SectionTitle')
+var Separator = require('../helpers/Separators')
 
 class Profile extends Component {
   getRowTitle(user, item) {
@@ -21,16 +26,18 @@ class Profile extends Component {
         return (
           <View key={index}>
             <View style={styles.rowContainer}>
-              <Text>{this.getRowTitle(userInfo, item)}</Text>
-              <Text>{userInfo[item]}</Text>
+              <Text style={styles.label}>{this.getRowTitle(userInfo, item)}</Text>
+              <Text style={styles.data}>{userInfo[item]}</Text>
             </View>
+            <Separator />
           </View>
         )
       }
     });
     return (
-      <View style={styles.container}>
-        <Text>Profile</Text>
+      <View>
+        <SectionTitle title="PROFILE"></SectionTitle>
+        <Separator />
         {list}
       </View>
     );
@@ -38,11 +45,21 @@ class Profile extends Component {
 }
 
 var styles = StyleSheet.create({
-  container: {
+  rowContainer: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    justifyContent: "flex-start",
+    alignSelf: "stretch",
+    width: width,
+    paddingLeft: 16,
+    paddingTop: 12,
+    paddingBottom: 12
+  },
+  label: {
+    color: "#0075bb",
+    fontSize: 14
+  },
+  data: {
+    fontSize: 18
   }
 });
 Profile.propType = {
