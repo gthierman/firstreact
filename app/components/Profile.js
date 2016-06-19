@@ -3,38 +3,59 @@ import {
   Text,
   View,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  TouchableHighlight
 } from 'react-native';
 
 var width = Dimensions.get('window').width;
-var SectionTitle = require('./SectionTitle')
 var Separator = require('../helpers/Separators')
+var api = require('../utils/api')
+var Repos = require('./Repos')
 
 class Profile extends Component {
   getRowTitle(user, item) {
     item = (item === 'public_repos') ? item.replace('_', ' ') : item;
     return item[0] ? item[0].toUpperCase() + item.slice(1) : item;
   }
+  viewRepos() {
+    api.getRepos(this.props.userInfo.login)
+      .then((res) => {
+        this.props.navigator.push({
+          component: Repos,
+          title: this.props.userInfo.name + "'s Repos",
+          passProps: {repos: res, userInfo: this.props.userInfo},
+          backButtonTitle: "Back"
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   render() {
-    var userInfo = this.props.userInfo;
     var listArr = ['company', 'location', 'followers', 'following', 'email', 'bio', 'public_repos'];
     var list = listArr.map((item, index) => {
-      if(!userInfo[item]) {
+      if(!this.props.userInfo[item]) {
         return <View key={index} />
-      }else if(userInfo[item] === 'public_repos'){
+      }else if(index === 6){
         return (
           <View key={index}>
-            <View>
-              <Text>word</Text>
-            </View>
+            <TouchableHighlight 
+              onPress={this.viewRepos.bind(this)}
+              underlayColor="white">
+              <View style={styles.rowContainer}>
+                <Text style={styles.label}>{this.getRowTitle(this.props.userInfo, item)}</Text>
+                <Text style={styles.data}>{this.props.userInfo[item]}</Text>
+              </View>
+            </TouchableHighlight>
+            <Separator />
           </View>
         )
       }else{
         return (
           <View key={index}>
             <View style={styles.rowContainer}>
-              <Text style={styles.label}>{this.getRowTitle(userInfo, item)}</Text>
-              <Text style={styles.data}>{userInfo[item]}</Text>
+              <Text style={styles.label}>{this.getRowTitle(this.props.userInfo, item)}</Text>
+              <Text style={styles.data}>{this.props.userInfo[item]}</Text>
             </View>
             <Separator />
           </View>
@@ -43,7 +64,6 @@ class Profile extends Component {
     });
     return (
       <View>
-        <SectionTitle title="PROFILE"></SectionTitle>
         <Separator />
         {list}
       </View>

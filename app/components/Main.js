@@ -35,11 +35,12 @@ class Main extends Component {
             error: 'User not found',
             isLoading: false
           })
-        }else {
+        }else{
+          console.log(this)
           this.props.navigator.push({
             title: res.name || "select an option",
             component: Dashboard,
-            passProps: {userInfo: res },
+            passProps: {userInfo: res},
             backButtonTitle: "Back"
           })
           this.setState({

@@ -3,43 +3,22 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableHighlight,
   ScrollView
 } from 'react-native';
-var api = require('../utils/api')
 var Badge = require('./Badge')
 var Profile = require('./Profile')
-var Repos = require('./Repos')
+var api = require('../utils/api')
 
 class Dashboard extends Component {
-  viewRepos() {
-    api.getRepos(this.props.userInfo.login)
-      .then((res) => {
-        console.log(res)
-        this.props.navigator.push({
-          component: Repos,
-          title: this.props.userInfo.name + "'s Repos",
-          passProps: {repos: res},
-          backButtonTitle: "Back"
-        })
-      })
-      .catch((res) => {
-      })
-  }
   render() {
     return (
-        <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.container}>
+        <ScrollView style={styles.scrollContainer}>
           <View>
             <Badge userInfo={this.props.userInfo}></Badge>
           </View>
           <View style={styles.profile}>
-            <Profile userInfo={this.props.userInfo}></Profile>
+            <Profile userInfo={this.props.userInfo} navigator={this.props.navigator}></Profile>
           </View>
-          <TouchableHighlight 
-            onPress={this.viewRepos.bind(this)}
-            underlayColor="white">
-            <Text>Get Repos</Text>
-          </TouchableHighlight>
         </ScrollView>
     );
   }
@@ -47,13 +26,10 @@ class Dashboard extends Component {
 
 var styles = StyleSheet.create({
   scrollContainer: {
+    flex: 1
   },
   container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    alignSelf: "stretch"
+    
   },
   profile: {
     marginTop: 30

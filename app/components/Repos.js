@@ -3,16 +3,15 @@ import {
   Text,
   View,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  ScrollView
 } from 'react-native';
 
 var width = Dimensions.get('window').width;
-var SectionTitle = require('./SectionTitle')
 var Separator = require('../helpers/Separators')
 
 class Repos extends Component {
   render() {
-    console.log(this.props.repos)
     var repos = this.props.repos;
     var list = repos.map((item, index) => {
       var desc = repos[index].description ? <Text>{repos[index].description}</Text> : <View />;
@@ -22,25 +21,35 @@ class Repos extends Component {
             <Text>{repos[index].name}</Text>
             <Text>{repos[index].stargazers_count}</Text>
             {desc}
-            <Separator/>
           </View>
+          <Separator/>
         </View>
       )
     });
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.scrollContainer}>
         {list}
-      </View>
+      </ScrollView>
     );
   }
 }
 
 var styles = StyleSheet.create({
-  container: {
+  scrollContainer: {
+    flex: 1
+  },
+  rowContainer: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "flex-start",
+    alignSelf: "stretch",
+    width: width,
+    paddingLeft: 16,
+    paddingTop: 12,
+    paddingBottom: 12
   }
 });
+Repos.propType = {
+  repos: React.PropTypes.array.isRequired,
+  userInfo: React.PropTypes.object.isRequired
+}
 module.exports = Repos;
