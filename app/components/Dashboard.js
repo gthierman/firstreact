@@ -4,10 +4,12 @@ import {
   View,
   StyleSheet,
   Image,
-  TouchableHighlight
+  TouchableHighlight,
+  ScrollView
 } from 'react-native';
 
 var Badge = require('./Badge')
+var Profile = require('./Profile')
 
 class Dashboard extends Component {
   makeBackground(btn) {
@@ -37,48 +39,24 @@ class Dashboard extends Component {
   }
   render() {
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.container}>
           <View>
             <Badge userInfo={this.props.userInfo}></Badge>
+            <Profile userInfo={this.props.userInfo}></Profile>
           </View>
-          <TouchableHighlight
-            style={this.makeBackground(0)}
-            onPress={this.goToProfile.bind(this)}
-            underlayColor="#fff">
-            <Text>View repos</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={this.makeBackground(0)}
-            onPress={this.goToRepos.bind(this)}
-            underlayColor="#fff">
-            <Text>View repos</Text>
-          </TouchableHighlight>
-          <TouchableHighlight 
-            style={this.makeBackground(1)}
-            onPress={this.goToNotes.bind(this)}
-            underlayColor="#fff">
-            <Text>View notes</Text>
-          </TouchableHighlight>
-        </View>
+        </ScrollView>
     );
   }
 }
 
 var styles = StyleSheet.create({
+  scrollContainer: {
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: 64
-  },
-  image: {
-    width: 475,
-    height: 400,
-    marginBottom: 30
-  },
-  badge: {
-    flex: 1
   }
 });
 module.exports = Dashboard;
