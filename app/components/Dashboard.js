@@ -6,7 +6,7 @@ import {
   Image,
   TouchableHighlight
 } from 'react-native';
-var Profile = require('./Profile')
+
 class Dashboard extends Component {
   makeBackground(btn) {
     var obj = {
@@ -25,11 +25,7 @@ class Dashboard extends Component {
     return obj;
   }
   goToProfile(event) {
-    this.props.navigator.push({
-      component: Profile,
-      title: 'Profile Page',
-      passProps: {userInfo: this.props.userInfo}
-    })
+    
   }
   goToRepos(event) {
     console.log('go to repos')

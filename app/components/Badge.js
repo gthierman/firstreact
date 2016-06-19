@@ -3,18 +3,17 @@ import {
   Text,
   View,
   StyleSheet,
-  Image,
-  TouchableHighlight
+  Image
 } from 'react-native';
 
 class Badge extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Image source={{uri: this.props.userInfo.avatar_url}}/>
-        <Text>{this.props.userInfo.name}</Text>
-        <Text>{this.props.userInfo.login}</Text>
-      </View>
+        <View style={styles.container}>
+          <Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image} resizeMode="contain"/>
+          <Text>{this.props.userInfo.name}</Text>
+          <Text>{this.props.userInfo.login}</Text>
+        </View>
     );
   }
 }
@@ -25,9 +24,14 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  image: {
+    width: 475,
+    height: 400,
+    marginBottom: 30
   }
 });
-Badge.propTypes = {
+Badge.propType = {
   userInfo: React.PropTypes.object.isRequired
-};
+}
 module.exports = Badge;
