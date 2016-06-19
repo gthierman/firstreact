@@ -4,13 +4,22 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  ScrollView
+  ScrollView,
+  TouchableHighlight
 } from 'react-native';
 
 var width = Dimensions.get('window').width;
 var Separator = require('../helpers/Separators')
+var Webview = require('../helpers/Web_view')
 
 class Repos extends Component {
+  openPage(url) {
+    this.props.navigator.push({
+      component: Webview,
+      title: 'Web View',
+      passProps: {url}
+    })
+  }
   render() {
     var repos = this.props.repos;
     var list = repos.map((item, index) => {
@@ -18,8 +27,11 @@ class Repos extends Component {
       return (
         <View key={index}>
           <View style={styles.rowContainer}>
-            <Text style={styles.repoTitle}>{repos[index].name}</Text>
-            <Text style={styles.stars}>{repos[index].stargazers_count}</Text>
+            <TouchableHighlight onPress={this.openPage.bind(this, this.props.repos[index].html_url)}
+              underlayColor="white">
+              <Text style={styles.repoTitle}>{repos[index].name}</Text>
+            </TouchableHighlight>
+            <Text style={styles.stars}>Stars: {repos[index].stargazers_count}</Text>
             {desc}
           </View>
           <Separator/>
